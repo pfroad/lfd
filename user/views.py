@@ -1,9 +1,12 @@
 # Create your views here.
+import datetime
+
 import coreapi
 import coreschema
 from rest_framework.decorators import api_view, schema
 from rest_framework.response import Response
 from rest_framework.schemas import AutoSchema
+from django.db import transaction
 
 from user.models import User
 
@@ -23,6 +26,7 @@ def user_detail(request):
     return Response(user)
 
 @api_view(['POST'])
+@transaction.atomic
 @schema(AutoSchema(
     manual_fields=[coreapi.Field('data', location='body', schema=coreschema.Object(description='{"uid":str, "page":int}')),]))
 def register(request):
@@ -33,4 +37,11 @@ def register(request):
     """
     mobile = request.data
     code = request.data
+
+    user = User()
+    user.mobile = mobile
+    # datetime.datetime.now().date()
+    user.birthday = datetime.datetime.now().date()
+
+    # User.objects
     return Response({})

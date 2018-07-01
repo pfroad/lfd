@@ -12,7 +12,7 @@ class User(models.Model):
     id = models.BigAutoField(primary_key=True)
     user_id = models.CharField(max_length=16)
     mobile = models.CharField(max_length=16)
-    sex = models.IntegerField(blank=True, null=True)
+    sex = models.IntegerField(blank=True, null=True, default=0)
     birthday = models.DateField(blank=True, null=True)
     mail = models.CharField(max_length=128, blank=True, null=True)
     name = models.CharField(max_length=32, blank=True, null=True)
