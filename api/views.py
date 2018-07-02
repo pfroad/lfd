@@ -13,7 +13,7 @@ from rest_framework.schemas import AutoSchema
 @schema(AutoSchema(
     manual_fields=[
         coreapi.Field('mobile', location='body', schema=coreschema.String(description='mobile(Reqiured)'), required=True),
-        coreapi.Field('verifyCode', location='body', schema=coreschema.String(description='verifyCode(optional)'))
+        # coreapi.Field('verifyCode', location='body', schema=coreschema.String(description='verifyCode(optional)'))
     ]
 ))
 def sms_code(request):

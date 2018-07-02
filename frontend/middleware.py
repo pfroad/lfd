@@ -20,31 +20,31 @@ class VerifyRequestMiddleware(object):
     def __call__(self, request):
         # Code to be executed for each request before
         # the view (and later middleware) are called.
-        uri = request.path
-
-        if uri.startswith("/api"):
-            if request.method == 'POST':
-                body = request.body
-                if len(body) == 0:
-                    return HttpResponseBadRequest(
-                        HttpResponse(
-                            json.dumps(
-                                {'status': False, 'data': None, 'error': "request body is blank"})))
-
-                data = json.loads((body).decode('utf-8'))
-            elif request.method == 'GET':
-                data = request.GET
-
-            err = self.verify_require(data)
-            if not err is None:
-                return err
-
-            sign = self.sign(data)
-            if sign != data["sign"]:
-                return HttpResponseBadRequest(
-                    HttpResponse(
-                        json.dumps(
-                            {'status': False, 'data': None, 'error': "Cannot verify sign"})))
+        # uri = request.path
+        #
+        # if uri.startswith("/api"):
+        #     if request.method == 'POST':
+        #         body = request.body
+        #         if len(body) == 0:
+        #             return HttpResponseBadRequest(
+        #                 HttpResponse(
+        #                     json.dumps(
+        #                         {'status': False, 'data': None, 'error': "request body is blank"})))
+        #
+        #         data = json.loads((body).decode('utf-8'))
+        #     elif request.method == 'GET':
+        #         data = request.GET
+        #
+        #     err = self.verify_require(data)
+        #     if not err is None:
+        #         return err
+        #
+        #     sign = self.sign(data)
+        #     if sign != data["sign"]:
+        #         return HttpResponseBadRequest(
+        #             HttpResponse(
+        #                 json.dumps(
+        #                     {'status': False, 'data': None, 'error': "Cannot verify sign"})))
 
         response = self.get_response(request)
 

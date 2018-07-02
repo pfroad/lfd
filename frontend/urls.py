@@ -18,17 +18,16 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.documentation import include_docs_urls
 
-from api import views
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('test', views.login),
+    # path('test', views.login),
     url(r'^docs/', include_docs_urls(title='LFD API', public=False,
                                      authentication_classes=[],
                                      permission_classes=[])),
     # url(r'^docs/', include('rest_framework_docs.urls')),
     url(r'^api-t/', include('user.urls')),
     url(r'^api-t/', include('api.urls')),
+    url(r'^api-t/', include('msg.urls')),
     # url(r'^docs/$', schema_view),
 ]
 
