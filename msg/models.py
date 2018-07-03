@@ -12,8 +12,8 @@ class SmsCode(models.Model):
     mobile = models.CharField(max_length=16)
     code = models.CharField(max_length=256)
     verified = models.IntegerField(blank=True, null=True)
-    created_date = models.DateTimeField(blank=True, null=True)
-    expired_date = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateTimeField(blank=True, null=True)
+    expired_at = models.DateTimeField(blank=True, null=True)
 
     class Meta:
         managed = False
